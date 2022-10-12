@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: org.firstinspires.ftc:gameAssets-PowerPlay:1.0.0@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/197e2645457f63bcadcd32dbb7d4e5c6/transformed/jetified-gameAssets-PowerPlay-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/197e2645457f63bcadcd32dbb7d4e5c6/transformed/jetified-gameAssets-PowerPlay-1.0.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.firstinspires.ftc/gameAssets-PowerPlay/1.0.0/b8ba64c62c8e86cfd6cbd6ee8720d69bba61f672/gameAssets-PowerPlay-1.0.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.firstinspires.ftc/gameAssets-PowerPlay/1.0.0/b8ba64c62c8e86cfd6cbd6ee8720d69bba61f672/gameAssets-PowerPlay-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

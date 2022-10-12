@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: org.openftc:opencv-repackaged:4.5.3-B@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/7c2b163972c5e064e02ca15ffe753027/transformed/jetified-opencv-repackaged-4.5.3-B/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7c2b163972c5e064e02ca15ffe753027/transformed/jetified-opencv-repackaged-4.5.3-B/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/7c2b163972c5e064e02ca15ffe753027/transformed/jetified-opencv-repackaged-4.5.3-B/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/opencv-repackaged/4.5.3-B/5894ca9b1cbf7061c60b7383754d564e21468d40/opencv-repackaged-4.5.3-B-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openftc/opencv-repackaged/4.5.3-B/1b10d4e5a953099a335d9686d011a03b2ca481c9/opencv-repackaged-4.5.3-B-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
