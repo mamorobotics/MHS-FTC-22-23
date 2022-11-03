@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-18:/values-sw720dp-land-v13/values-sw720dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\miles\\Code\\MHS-FTC-22-23\\FtcRobotController\\build\\intermediates\\packaged_res\\debug\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "58",
+                        "endOffsets": "109"
+                    }
+                }
+            ]
+        }
+    ]
+}
