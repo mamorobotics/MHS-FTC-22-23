@@ -1,11 +1,11 @@
-package org.firstinspires.ftc.teamcode.Ours;
+package org.firstinspires.ftc.teamcode.ours;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.Ours.Vision.CupDetector;
+import org.firstinspires.ftc.teamcode.ours.vision.CupDetector;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
@@ -60,7 +60,7 @@ public class Auto extends LinearOpMode {
             telemetry.addData("Duck Position",detector.getCupPosition());
             telemetry.update();
         }
-    waitForStart();
+        waitForStart();
         encoderDrive(1, 50,50);
         sleep(5000);
         encoderDrive(.2,-50,-50);

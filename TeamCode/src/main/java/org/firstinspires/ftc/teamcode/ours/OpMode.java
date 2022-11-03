@@ -3,25 +3,36 @@ package org.firstinspires.ftc.teamcode.ours;
 import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
 
-@ com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "OpMode")
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
+@ com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class OpMode extends LinearOpMode {
-    static DcMotor FL,BL,FR,BR;
+    static DcMotor FL, BL, FR, BR;
     static double speed = 1;
-    static int load = 1;
 
     @Override
     public void runOpMode() throws InterruptedException {
-        setupMotors(hardwareMap);
+        FL = hardwareMap.get(DcMotor.class, "FrontL");
+        BL = hardwareMap.get(DcMotor.class, "BackL");
+        FR = hardwareMap.get(DcMotor.class, "FrontR");
+        BR = hardwareMap.get(DcMotor.class, "BackR");
+
+        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        FL.setDirection(DcMotor.Direction.REVERSE);
+        BL.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
-
+        
         while (opModeIsActive()){
             telemetry.addData("X", -gamepad1.left_stick_y);
             telemetry.addData("Y", gamepad1.left_stick_x);
+            telemetry.update();
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
-
-            telemetry.update();
         }
     }
 
@@ -36,20 +47,5 @@ public class OpMode extends LinearOpMode {
         BL.setPower(backLeftPower);
         FR.setPower(frontRightPower);
         BR.setPower(backRightPower);
-    }
-
-    private static void setupMotors(HardwareMap hardwareMap){
-        FL = hardwareMap.get(DcMotor.class, "FrontL");
-        BL = hardwareMap.get(DcMotor.class, "BackL");
-        FR = hardwareMap.get(DcMotor.class, "FrontR");
-        BR = hardwareMap.get(DcMotor.class, "BackR");
-
-        FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        FL.setDirection(DcMotor.Direction.REVERSE);
-        BL.setDirection(DcMotor.Direction.REVERSE);
     }
 }
