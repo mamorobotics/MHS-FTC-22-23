@@ -25,7 +25,7 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
 
     public double dilationConstant = 2; // tune
 
-    public String cupSide = null;
+    public int cupSide = -1;
 
     private final Object sync = new Object();
 
@@ -92,14 +92,29 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, kernelRectangleSize); // dialution
         Imgproc.dilate(HSVMat, HSVMat, kernel);
 
+        int xLength = (bottomX-topX)/(cupWidth/3);
+
+        int[] colors = new int[xLength*2];
+
         synchronized (sync) {
             for(int yindex=1; yindex<=2; yindex++){
-                for(int xindex=0; xindex<=(bottomX-topX)/(cupWidth/3); xindex++){
+                for(int xindex=0; xindex<=xLength; xindex++){
                     int xabsolute = xindex*(cupWidth/3)+topY;
                     int yabsolute = yindex*(cupHeight/3)+topX;
-                    int color = getColor(xabsolute, yabsolute, HSVMat, 3);
+                    colors[xindex*yindex] = getColor(xabsolute, yabsolute, HSVMat, 3);
+                }
+            }
 
-                    //this is where matrix should go
+            for(int i=1; i<=colors.length/2; i++){
+                if(colors[i-1] == colors[i]){
+                    if(colors[i-1] == colors[i]){
+                        if(colors[i-1+xLength] == colors[i]){
+                            if(colors[i+xLength] == colors[i]){
+                                cupSide = colors[i];
+                                break;
+                            }
+                        }
+                    }
                 }
             }
         }
