@@ -98,6 +98,8 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
                     int xabsolute = xindex*(cupWidth/3)+topY;
                     int yabsolute = yindex*(cupHeight/3)+topX;
                     int color = getColor(xabsolute, yabsolute, HSVMat, 3);
+
+                    //this is where matrix should go
                 }
             }
         }
