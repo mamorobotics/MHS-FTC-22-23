@@ -31,21 +31,21 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
 
     Telemetry telemetryOpenCV = null;
 
-    public int topX = 0;
-    public int topY = 0;
-    public int bottomX = 300;
+    public int topX = 220;
+    public int topY = 52;
+    public int bottomX = 512;
 
-    public int cupWidth = 30;
-    public int cupHeight = 90;
+    public int cupWidth = 60;
+    public int cupHeight = 120;
 
-    public int yellowLow = 0;
-    public int yellowHigh = 0;
+    public int yellowLow = 55;
+    public int yellowHigh = 75;
 
-    public int blueLow = 0;
-    public int blueHigh = 0;
+    public int blueLow = 195;
+    public int blueHigh = 215;
 
-    public int greenLow = 0;
-    public int greenHigh = 0;
+    public int greenLow = 115;
+    public int greenHigh = 145;
 
     // constructor
     public CupDetectorPowerPlay(Telemetry OpModeTelemetry) {
