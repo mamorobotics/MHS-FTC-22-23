@@ -52,7 +52,7 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         telemetryOpenCV = OpModeTelemetry;
     }
 
-    public String getCupPosition() {
+    public int getCupPosition() {
         synchronized (sync) {
             return cupSide;
         }
