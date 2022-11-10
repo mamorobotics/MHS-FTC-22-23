@@ -31,6 +31,13 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
 
     Telemetry telemetryOpenCV = null;
 
+    public int topX = 0;
+    public int topY = 0;
+    public int bottomX = 300;
+
+    public int cupWidth = 30;
+    public int cupHeight = 90;
+
     public int yellowLow = 0;
     public int yellowHigh = 0;
 
@@ -39,8 +46,6 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
 
     public int greenLow = 0;
     public int greenHigh = 0;
-
-    public Rect detectROI = new Rect(0, 0 , 100, 100);
 
     // constructor
     public CupDetectorPowerPlay(Telemetry OpModeTelemetry) {
@@ -53,9 +58,28 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         }
     }
 
+    public int getColor(int x, int y, Mat mat, int scale) {
+        Mat cropped = new Mat(mat, new Rect(x, y, scale, scale));
+
+        MatOfDouble average = new MatOfDouble();
+        MatOfDouble std = new MatOfDouble();
+        Core.meanStdDev(cropped, average, std);
+        double averageDouble = average.toArray()[0];
+
+        if((averageDouble >= yellowLow) && (averageDouble <= yellowHigh)){
+            return 0;
+        }
+        if((averageDouble >= blueLow) && (averageDouble <= blueHigh)){
+            return 1;
+        }
+        if((averageDouble >= greenLow) && (averageDouble <= greenHigh)){
+            return 2;
+        }
+        return -1;
+    }
+
     @Override
     public Mat processFrame(Mat input) {
-
         Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL);
         Core.inRange(HSVMat, lowerHSV, upperHSV, HSVMat);
 
@@ -69,21 +93,12 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         Imgproc.dilate(HSVMat, HSVMat, kernel);
 
         synchronized (sync) {
-            Mat cropped = new Mat(HSVMat, detectROI);
-
-            MatOfDouble average = new MatOfDouble();
-            MatOfDouble std = new MatOfDouble();
-            Core.meanStdDev(cropped, average, std);
-            double averageDouble = average.toArray()[0];
-
-            if((averageDouble >= yellowLow) && (averageDouble <= yellowHigh)){
-                cupSide = "yellow";
-            }
-            if((averageDouble >= blueLow) && (averageDouble <= blueHigh)){
-                cupSide = "blue";
-            }
-            if((averageDouble >= greenLow) && (averageDouble <= greenHigh)){
-                cupSide = "green";
+            for(int yindex=1; yindex<=2; yindex++){
+                for(int xindex=0; xindex<=(bottomX-topX)/(cupWidth/3); xindex++){
+                    int xabsolute = xindex*(cupWidth/3)+topY;
+                    int yabsolute = yindex*(cupHeight/3)+topX;
+                    int color = getColor(xabsolute, yabsolute, HSVMat, 3);
+                }
             }
         }
        // telemetryOpenCV.update();
