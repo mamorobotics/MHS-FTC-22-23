@@ -9,8 +9,8 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-@Autonomous(name = "visionTest")
-public class ComputerVisionTest extends LinearOpMode {
+@Autonomous(name = "visionTest21")
+public class ComputerVisionTest21 extends LinearOpMode {
     OpenCvCamera webcam; // webcam object
     CupDetector detector = new CupDetector(telemetry);
 
