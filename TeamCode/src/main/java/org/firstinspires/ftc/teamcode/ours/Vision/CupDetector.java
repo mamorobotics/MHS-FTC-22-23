@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.ours.vision;
+package org.firstinspires.ftc.teamcode.ours.Vision;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
