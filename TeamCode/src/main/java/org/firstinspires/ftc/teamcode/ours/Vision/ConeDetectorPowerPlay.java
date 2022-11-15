@@ -11,7 +11,7 @@ import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
-public class CupDetectorPowerPlayTally extends OpenCvPipeline {
+public class ConeDetectorPowerPlay extends OpenCvPipeline {
 
     Mat HSVMat = new Mat();
 
@@ -38,8 +38,10 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
     // Ranges of the colors
     public int yellowLow = 30;
     public int yellowHigh = 50;
+
     public int magentaLow = 210;
     public int magentaHigh = 235;
+
     public int greenLow = 80;
     public int greenHigh = 106;
 
@@ -47,7 +49,7 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
     public double dilationConstant = 2;
 
     // Constructor
-    public CupDetectorPowerPlayTally(Telemetry OpModeTelemetry) {
+    public ConeDetectorPowerPlay(Telemetry OpModeTelemetry) {
         telemetryOpenCV = OpModeTelemetry;
     }
 
@@ -57,7 +59,7 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
         }
     }
 
-    public int getColor(int x, int y, Mat mat, int scale) {
+    private int getColor(int x, int y, Mat mat, int scale) { // 0: yellow, 1: magenta, 2: green
         // Obtaining the cropped mat
         Mat cropped = new Mat(mat, new Rect(x, y, scale, scale));
 
@@ -78,13 +80,19 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
         return -1;
     }
 
+    public int getCopColor(){
+        synchronized (sync){
+            return copColor;
+        }
+    }
+
     @Override
     public Mat processFrame(Mat input) {
         copColor = -1;
 
-        Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL);
+        Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL); //Convert to HSV
 
-        Size kernalSize = new Size(blurConstant, blurConstant);
+        Size kernalSize = new Size(blurConstant, blurConstant); // Gaussian Blur
         Imgproc.GaussianBlur(HSVMat, HSVMat, kernalSize, 0);
         Size kernalRectangleSize = new Size(2 * dilationConstant + 1, 2 * dilationConstant + 1);
         Mat kernal = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, kernalRectangleSize); // dialution
@@ -114,7 +122,7 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
 
                             int color = getColor(x, y, HSVMat, 3);
                             if (color == 0) {
-                                Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 245, 0), 2);
+                                Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 245, 0), 2); //drawing circles in sample regions to visualize
                             } else if (color == 1) {
                                 Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 0, 255), 2);
                             } else if (color == 2) {
@@ -156,9 +164,9 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
             }
         }
 
-        // Update the telemetry with the cup color
-        telemetryOpenCV.addData("Cup Color: ", copColor);
-        telemetryOpenCV.update();
+        // Update the telemetry with the cup color for testing
+       // telemetryOpenCV.addData("Cup Color: ", copColor);
+       // telemetryOpenCV.update();
         return input;
     }
 }
