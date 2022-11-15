@@ -99,7 +99,7 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
 
         synchronized (sync) {
             for(int yindex=1; yindex<=2; yindex++){
-                for(int xindex=0; xindex<xLength; xindex++){
+                for(int xindex=1; xindex<xLength; xindex++){
                     int xabsolute = xindex*(cupWidth/2)+topX;
                     int yabsolute = yindex*(cupHeight/3)+topY;
                     int color = getColor(xabsolute, yabsolute, HSVMat, 3);
