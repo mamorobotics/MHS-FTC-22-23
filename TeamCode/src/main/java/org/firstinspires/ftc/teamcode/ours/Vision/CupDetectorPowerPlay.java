@@ -5,6 +5,7 @@ import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
@@ -92,15 +93,16 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, kernelRectangleSize); // dialution
         Imgproc.dilate(HSVMat, HSVMat, kernel);
 
-        int xLength = (bottomX-topX)/(cupWidth/3);
+        int xLength = (bottomX-topX)/(cupWidth/3)+1;
 
         int[] colors = new int[xLength*2];
 
         synchronized (sync) {
             for(int yindex=1; yindex<=2; yindex++){
-                for(int xindex=0; xindex<=xLength; xindex++){
+                for(int xindex=0; xindex<xLength; xindex++){
                     int xabsolute = xindex*(cupWidth/3)+topX;
                     int yabsolute = yindex*(cupHeight/3)+topY;
+                    Imgproc.circle(input, new Point(xabsolute, yabsolute), 2, new Scalar(0, 0, 255), 2);
                     colors[xindex*yindex] = getColor(xabsolute, yabsolute, HSVMat, 3);
                 }
             }
@@ -118,7 +120,9 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
                 }
             }
         }
-       // telemetryOpenCV.update();
+        Imgproc.rectangle(input, new Point(topX, topY), new Point(bottomX, topY+cupHeight), new Scalar(255, 0, 0), 2);
+        telemetryOpenCV.addData("Cup Color:", cupSide);
+        telemetryOpenCV.update();
         return input;
     }
 }
