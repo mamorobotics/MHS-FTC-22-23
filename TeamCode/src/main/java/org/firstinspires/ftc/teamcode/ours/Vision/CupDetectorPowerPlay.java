@@ -93,14 +93,14 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, kernelRectangleSize); // dialution
         Imgproc.dilate(HSVMat, HSVMat, kernel);
 
-        int xLength = (bottomX-topX)/(cupWidth/3)+1;
+        int xLength = (bottomX-topX)/(cupWidth/2)+1;
 
         int[] colors = new int[xLength*2];
 
         synchronized (sync) {
             for(int yindex=1; yindex<=2; yindex++){
                 for(int xindex=0; xindex<xLength; xindex++){
-                    int xabsolute = xindex*(cupWidth/3)+topX;
+                    int xabsolute = xindex*(cupWidth/2)+topX;
                     int yabsolute = yindex*(cupHeight/3)+topY;
                     Imgproc.circle(input, new Point(xabsolute, yabsolute), 2, new Scalar(0, 0, 255), 2);
                     colors[xindex*yindex] = getColor(xabsolute, yabsolute, HSVMat, 3);
