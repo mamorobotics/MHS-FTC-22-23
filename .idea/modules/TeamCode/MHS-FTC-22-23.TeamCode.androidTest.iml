@@ -84,5 +84,4 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.openftc:easyopencv:1.5.2@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.openftc:opencv-repackaged:4.5.3-B@aar" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="MHS-FTC-22-23.TeamCode.main" />
 </module>

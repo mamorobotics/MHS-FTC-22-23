@@ -19,7 +19,6 @@ public class far_to_same_terminal_red extends LinearOpMode {
     OpenCvCamera webcam;
     ConeDetectorPowerPlay detector = new ConeDetectorPowerPlay(telemetry);
 
-
     @Override
     public void runOpMode() throws InterruptedException {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
