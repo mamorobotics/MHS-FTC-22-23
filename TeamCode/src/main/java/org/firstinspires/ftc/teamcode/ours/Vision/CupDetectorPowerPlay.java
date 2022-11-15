@@ -65,7 +65,7 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         MatOfDouble average = new MatOfDouble();
         MatOfDouble std = new MatOfDouble();
         Core.meanStdDev(cropped, average, std);
-        double averageDouble = average.toArray()[0];
+        double averageDouble = average.get(0,0)[0];
 
         if((averageDouble >= yellowLow) && (averageDouble <= yellowHigh)){
             return 0;
@@ -102,7 +102,8 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
                 for(int xindex=0; xindex<xLength; xindex++){
                     int xabsolute = xindex*(cupWidth/2)+topX;
                     int yabsolute = yindex*(cupHeight/3)+topY;
-                    Imgproc.circle(input, new Point(xabsolute, yabsolute), 2, new Scalar(0, 0, 255), 2);
+                    int color = getColor(xabsolute, yabsolute, HSVMat, 3);
+                    Imgproc.circle(input, new Point(xabsolute, yabsolute), 2, new Scalar((color+1)*(255/3), 0, 0), 2);
                     colors[xindex*yindex] = getColor(xabsolute, yabsolute, HSVMat, 3);
                 }
             }
