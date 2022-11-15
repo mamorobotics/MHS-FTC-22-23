@@ -16,15 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CupDetectorPowerPlay extends OpenCvPipeline {
-
-    Mat HSVMat = new Mat();
-
-    public Scalar lowerHSV = new Scalar(0, 42.5, 172.8); // the lower limit for the detection (tune this for camera)
-    public Scalar upperHSV = new Scalar(120.4, 255, 255); // upper limit also tune this with the camera
-
-    public double blurConstant = 1; // change this to change the Gaussian blur amount
-
-    public double dilationConstant = 2; // tune
+    Mat input = new Mat();
 
     public int cupSide = -1;
 
@@ -59,13 +51,15 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
         }
     }
 
-    public int getColor(int x, int y, Mat mat, int scale) {
-        Mat cropped = new Mat(mat, new Rect(x, y, scale, scale));
+    public double getColor(int x, int y, Mat img, int scale) {
+        Mat hsvimg = new Mat();
+        Imgproc.cvtColor(img, hsvimg, Imgproc.COLOR_RGB2HSV);
+        Mat cropped = new Mat(hsvimg, new Rect(x, y, scale, scale));
 
         MatOfDouble average = new MatOfDouble();
         MatOfDouble std = new MatOfDouble();
         Core.meanStdDev(cropped, average, std);
-        double averageDouble = average.get(0,0)[0];
+        double averageDouble = average.toArray()[0];
 
         if((averageDouble >= yellowLow) && (averageDouble <= yellowHigh)){
             return 0;
@@ -81,46 +75,27 @@ public class CupDetectorPowerPlay extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
-        Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL);
-        Core.inRange(HSVMat, lowerHSV, upperHSV, HSVMat);
-
-        Size kernelSize = new Size(blurConstant, blurConstant);
-
-        // adds blur effect to the image to help image processing
-        Imgproc.GaussianBlur(HSVMat, HSVMat, kernelSize, 0);
-        Size kernelRectangleSize = new Size(2 * dilationConstant + 1, 2 * dilationConstant + 1);
-
-        Mat kernel = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, kernelRectangleSize); // dialution
-        Imgproc.dilate(HSVMat, HSVMat, kernel);
-
         int xLength = (bottomX-topX)/(cupWidth/2)+1;
-
-        int[] colors = new int[xLength*2];
+        double[] colors = new double[xLength*2];
 
         synchronized (sync) {
             for(int yindex=1; yindex<=2; yindex++){
                 for(int xindex=1; xindex<xLength; xindex++){
                     int xabsolute = xindex*(cupWidth/2)+topX;
                     int yabsolute = yindex*(cupHeight/3)+topY;
-                    int color = getColor(xabsolute, yabsolute, HSVMat, 3);
+                    double color = getColor(xabsolute, yabsolute, input, 3);
                     Imgproc.circle(input, new Point(xabsolute, yabsolute), 2, new Scalar((color+1)*(255/3), 0, 0), 2);
-                    colors[xindex*yindex] = getColor(xabsolute, yabsolute, HSVMat, 3);
+                    colors[xindex*yindex] = getColor(xabsolute, yabsolute, input, 3);
                 }
             }
 
-            for(int i=1; i<=colors.length/2; i++){
-                if(colors[i-1] == colors[i]){
-                    if(colors[i-1] == colors[i]){
-                        if(colors[i-1+xLength] == colors[i]){
-                            if(colors[i+xLength] == colors[i]){
-                                cupSide = colors[i];
-                                break;
-                            }
-                        }
-                    }
+            for (int i = 0; i<=xLength; i++){
+                if(colors[i] == -1) {
+                    cupSide = (int)colors[i];
                 }
             }
         }
+
         Imgproc.rectangle(input, new Point(topX, topY), new Point(bottomX, topY+cupHeight), new Scalar(255, 0, 0), 2);
         telemetryOpenCV.addData("Cup Color:", cupSide);
         telemetryOpenCV.update();

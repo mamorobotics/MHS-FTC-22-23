@@ -4,6 +4,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfDouble;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
@@ -27,8 +28,8 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
     // Size of the images
     public int lowX = 0;
     public int lowY = 0;
-    public int upX = 320;
-    public int upY = 240;
+    public int upX = 512;
+    public int upY = 341;
     
     // Size of the cup
     public int cupWidth = 60;
@@ -100,7 +101,9 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
                         for (int innerXIndex = 0; innerXIndex < subSize; innerXIndex++) {
                             int x = (xIndex + innerXIndex) * xStep + lowX;
                             int y = (yIndex + innerYIndex) * yStep + lowY;
-                            
+                            Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 0, 0), 2);
+
+
                             // Tallying the colors
                             switch (getColor(x, y, HSVMat, 3)) {
                                 case 0:
