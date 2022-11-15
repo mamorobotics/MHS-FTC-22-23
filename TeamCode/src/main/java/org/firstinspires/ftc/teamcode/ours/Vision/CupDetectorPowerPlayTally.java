@@ -28,20 +28,23 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
     // Size of the images
     public int lowX = 0;
     public int lowY = 0;
-    public int upX = 512;
-    public int upY = 341;
+    public int upX = 320;
+    public int upY = 220;
     
     // Size of the cup
-    public int cupWidth = 60;
-    public int cupHeight = 120;
+    public int cupWidth = 30;
+    public int cupHeight = 60;
     
     // Ranges of the colors
-    public int yellowLow = 55;
-    public int yellowHigh = 75;
-    public int blueLow = 195;
-    public int blueHigh = 215;
-    public int greenLow = 115;
-    public int greenHigh = 145;
+    public int yellowLow = 30;
+    public int yellowHigh = 50;
+    public int magentaLow = 210;
+    public int magentaHigh = 235;
+    public int greenLow = 80;
+    public int greenHigh = 106;
+
+    public double blurConstant = 1;
+    public double dilationConstant = 2;
 
     // Constructor
     public CupDetectorPowerPlayTally(Telemetry OpModeTelemetry) {
@@ -62,12 +65,12 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
         MatOfDouble average = new MatOfDouble();
         MatOfDouble std = new MatOfDouble();
         Core.meanStdDev(cropped, average, std);
-        double averageDouble = average.toArray()[0];
-
+        double[] averageArray = average.toArray();
+        double averageDouble = averageArray[0];
         // Determining the color of the cropped mat based on the average
         if ((averageDouble >= yellowLow) && (averageDouble <= yellowHigh)) {
             return 0;
-        } else if ((averageDouble >= blueLow) && (averageDouble <= blueHigh)) {
+        } else if ((averageDouble >= magentaLow) && (averageDouble <= magentaHigh)) {
             return 1;
         } else if ((averageDouble >= greenLow) && (averageDouble <= greenHigh)) {
             return 2;
@@ -77,35 +80,51 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
+        copColor = -1;
+
         Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL);
-        Core.inRange(HSVMat, lowerHSV, upperHSV, HSVMat);
-        
+
+        Size kernalSize = new Size(blurConstant, blurConstant);
+        Imgproc.GaussianBlur(HSVMat, HSVMat, kernalSize, 0);
+        Size kernalRectangleSize = new Size(2 * dilationConstant + 1, 2 * dilationConstant + 1);
+        Mat kernal = Imgproc.getStructuringElement(Imgproc.MORPH_RECT, kernalRectangleSize); // dialution
+        Imgproc.dilate(HSVMat, HSVMat, kernal);
+
         // Add other required preprocessing
 
         int xStep = cupWidth / 3;
         int yStep = cupHeight / 3;
-        int xLength = (upX - lowX) / xStep;
-        int yLength = (upY - lowY) / yStep;
-        int subSize = 2, buffer = 1;
+        int subSize = 3, buffer = 0;
+        int xLength = ((int)((upX - lowX) / xStep) / subSize) * subSize;
+        int yLength = ((int)((upY - lowY) / yStep) / subSize) * subSize;
 
         int yellow = 0, blue = 0, green = 0;
 
         synchronized (sync) {
             
             // Outer sampling
-            for(int yIndex = 0; yIndex < yLength; yIndex += subSize) {
-                for(int xIndex = 0; xIndex < xLength; xIndex += subSize) {
+            for(int yIndex = 0; yIndex < yLength; yIndex++) {
+                for(int xIndex = 0; xIndex < xLength; xIndex++) {
 
                     // Inner sampling
                     for (int innerYIndex = 0; innerYIndex < subSize; innerYIndex++) {
                         for (int innerXIndex = 0; innerXIndex < subSize; innerXIndex++) {
                             int x = (xIndex + innerXIndex) * xStep + lowX;
                             int y = (yIndex + innerYIndex) * yStep + lowY;
-                            Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 0, 0), 2);
 
+                            int color = getColor(x, y, HSVMat, 3);
+                            if (color == 0) {
+                                Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 245, 0), 2);
+                            } else if (color == 1) {
+                                Imgproc.circle(input, new Point(x, y), 2, new Scalar(255, 0, 255), 2);
+                            } else if (color == 2) {
+                                Imgproc.circle(input, new Point(x, y), 2, new Scalar(0, 255, 0), 2);
+                            } else {
+                                Imgproc.circle(input, new Point(x, y), 2, new Scalar(0, 0, 0), 2);
+                            }
 
                             // Tallying the colors
-                            switch (getColor(x, y, HSVMat, 3)) {
+                            switch (color) {
                                 case 0:
                                     yellow++;
                                     break;
@@ -130,9 +149,9 @@ public class CupDetectorPowerPlayTally extends OpenCvPipeline {
                     }
 
                     // Decrementing each counter to prevent random pixels from skewing the decision
-                    yellow--;
-                    blue--;
-                    green--;
+                    yellow = 0;
+                    blue = 0;
+                    green = 0;
                 }
             }
         }

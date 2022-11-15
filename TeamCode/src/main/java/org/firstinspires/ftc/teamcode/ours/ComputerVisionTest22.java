@@ -6,7 +6,6 @@
  import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
  import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
- import org.firstinspires.ftc.teamcode.ours.Vision.CupDetectorPowerPlay;
  import org.openftc.easyopencv.OpenCvCamera;
  import org.openftc.easyopencv.OpenCvCameraFactory;
  import org.openftc.easyopencv.OpenCvCameraRotation;
