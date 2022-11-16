@@ -16,7 +16,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 @Autonomous(name = "red_spin_close")
-public class red_close_spin extends LinearOpMode {
+public class Red_close_spin extends LinearOpMode {
     Pose2d startPos = new Pose2d(-35, -62, Math.toRadians(90));
     static DcMotor spinner;
     static Servo bucketServo;

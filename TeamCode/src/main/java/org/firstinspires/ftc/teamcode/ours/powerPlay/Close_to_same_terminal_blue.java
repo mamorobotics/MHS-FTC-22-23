@@ -12,7 +12,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 //@Autonomous(name = "Close_To_Same_Blue")
-public class close_to_same_terminal_blue extends LinearOpMode {
+public class Close_to_same_terminal_blue extends LinearOpMode {
     Pose2d startPos = new Pose2d(36, 62, Math.toRadians(270));
     int cupSide = 1;
     OpenCvCamera webcam;
