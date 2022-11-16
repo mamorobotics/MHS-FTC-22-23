@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.ours.powerPlay;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -11,7 +12,7 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
-//Autonomous(name = "Close_To_Same_Red")
+@Autonomous(name = "Close_To_Same_Red")
 public class Close_to_same_terminal_red extends LinearOpMode {
     Pose2d startPos = new Pose2d(-36, -62, Math.toRadians(270));
     int cupSide = 1;
@@ -73,7 +74,6 @@ public class Close_to_same_terminal_red extends LinearOpMode {
                 .build();
 
         while (!opModeIsActive() && !isStopRequested()) {
-            //bucketServo.setPosition(upright);
             cupSide = detector.getCopColor();
             String cupColor = "**Add Colors**";
             if(cupSide == 0) {
