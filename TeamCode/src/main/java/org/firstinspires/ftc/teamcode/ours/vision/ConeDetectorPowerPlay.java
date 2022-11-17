@@ -42,8 +42,8 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
     public int magentaLow = 210;
     public int magentaHigh = 235;
 
-    public int greenLow = 80;
-    public int greenHigh = 106;
+    public int greenLow = 64;
+    public int greenHigh = 82;
 
     public double blurConstant = 1;
     public double dilationConstant = 2;
