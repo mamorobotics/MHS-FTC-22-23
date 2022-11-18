@@ -12,10 +12,10 @@ public class OpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        FL = hardwareMap.get(DcMotor.class, "FrontL");
-        BL = hardwareMap.get(DcMotor.class, "BackL");
-        FR = hardwareMap.get(DcMotor.class, "FrontR");
-        BR = hardwareMap.get(DcMotor.class, "BackR");
+        FL = hardwareMap.get(DcMotor.class, "leftFront");
+        BL = hardwareMap.get(DcMotor.class, "leftRear");
+        FR = hardwareMap.get(DcMotor.class, "rightFront");
+        BR = hardwareMap.get(DcMotor.class, "rightRear");
 
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
