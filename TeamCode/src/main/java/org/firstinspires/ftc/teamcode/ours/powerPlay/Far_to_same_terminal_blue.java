@@ -92,18 +92,18 @@ public class Far_to_same_terminal_blue extends LinearOpMode {
         waitForStart();
 
         drive.followTrajectorySequence(baseSeq);
-        if(cupSide == 1) {
-            drive.followTrajectorySequence(seq1);
-        }
-        if(cupSide == 2) {
-            drive.followTrajectorySequence(seq2);
-        }
-        if(cupSide == 3) {
-            drive.followTrajectorySequence(seq3);
-        }
-        else{
-            drive.followTrajectorySequence(seqNone);
-        }
+//        if(cupSide == 1) {
+//            drive.followTrajectorySequence(seq1);
+//        }
+//        if(cupSide == 2) {
+//            drive.followTrajectorySequence(seq2);
+//        }
+//        if(cupSide == 3) {
+//            drive.followTrajectorySequence(seq3);
+//        }
+//        else{
+//            drive.followTrajectorySequence(seqNone);
+//        }
     }
 
 }
