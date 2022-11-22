@@ -41,6 +41,8 @@ public class Far_to_same_terminal_blue extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(startPos);
 
+        waitForStart();
+
         TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                 .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                 .back(48)
@@ -72,7 +74,7 @@ public class Far_to_same_terminal_blue extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(12, 62, Math.toRadians(270)))
                 .build();
 
-        while (!opModeIsActive() && !isStopRequested()) {
+        /*while (!opModeIsActive() && !isStopRequested()) {
             cupSide = detector.getCopColor();
             String cupColor = "**Add Colors**";
             if(cupSide == 0) {
@@ -87,9 +89,7 @@ public class Far_to_same_terminal_blue extends LinearOpMode {
             telemetry.addData("Cup Color", cupColor);
             telemetry.update();
             sleep(100);
-        }
-
-        waitForStart();
+        } */
 
         drive.followTrajectorySequence(baseSeq);
 //        if(cupSide == 1) {
