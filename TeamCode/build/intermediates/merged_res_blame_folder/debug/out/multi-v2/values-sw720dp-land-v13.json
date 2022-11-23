@@ -4,7 +4,7 @@
             "outputFile": "org.firstinspires.ftc.teamcode.TeamCode-mergeDebugResources-18:/values-sw720dp-land-v13/values-sw720dp-land-v13.xml",
             "map": [
                 {
-                    "source": "/Users/maxlazarus/Documents/GitHub/MHS-FTC-22-23/FtcRobotController/build/intermediates/packaged_res/debug/values-sw720dp-land-v13/values-sw720dp-land-v13.xml",
+                    "source": "C:\\Users\\miles\\Code\\MHS-FTC-22-23\\FtcRobotController\\build\\intermediates\\packaged_res\\debug\\values-sw720dp-land-v13\\values-sw720dp-land-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
