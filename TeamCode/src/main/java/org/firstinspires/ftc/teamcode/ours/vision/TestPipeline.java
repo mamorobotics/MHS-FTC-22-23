@@ -35,9 +35,14 @@ public class TestPipeline  extends LinearOpMode {
         });
 
         while (!opModeIsActive() && !isStopRequested()) {
+            sleep(250);
             telemetry.addData("color",pipeline.getCopColor());
             telemetry.update();
         }
         waitForStart();
+        while(opModeIsActive()){
+            telemetry.addData("color", pipeline.copColor);
+            telemetry.update();
+        }
     }
 }

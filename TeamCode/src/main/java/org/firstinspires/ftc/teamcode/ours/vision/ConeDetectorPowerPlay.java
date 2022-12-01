@@ -42,8 +42,8 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
     public int magentaLow = 210;
     public int magentaHigh = 235;
 
-    public int greenLow = 64;
-    public int greenHigh = 82;
+    public int greenLow = 80;
+    public int greenHigh = 100;
 
     public double blurConstant = 1;
     public double dilationConstant = 2;
@@ -77,13 +77,11 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
         } else if ((averageDouble >= greenLow) && (averageDouble <= greenHigh)) {
             return 2;
         }
-        return -1;
+        return copColor;
     }
 
-    public int getCopColor(){
-        synchronized (sync){
-            return copColor;
-        }
+    public int getCopColor() {
+        return copColor;
     }
 
     @Override
@@ -109,7 +107,7 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
         int yellow = 0, blue = 0, green = 0;
 
         synchronized (sync) {
-            
+
             // Outer sampling
             for(int yIndex = 0; yIndex < yLength; yIndex++) {
                 for(int xIndex = 0; xIndex < xLength; xIndex++) {
@@ -130,7 +128,7 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
                             } else {
                                 Imgproc.circle(input, new Point(x, y), 2, new Scalar(0, 0, 0), 2);
                             }
-
+                            Imgproc.putText(input, Integer.toString(copColor),new Point(240,120), 0, .5, new Scalar(0,0,255));
                             // Tallying the colors
                             switch (color) {
                                 case 0:
@@ -165,8 +163,8 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
         }
 
         // Update the telemetry with the cup color for testing
-       // telemetryOpenCV.addData("Cup Color: ", copColor);
-       // telemetryOpenCV.update();
+        //telemetryOpenCV.addData("Cup Color: ", copColor);
+       //  telemetryOpenCV.update();
         return input;
     }
 }
