@@ -36,8 +36,8 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
     public int cupHeight = 60;
     
     // Ranges of the colors
-    public int yellowLow = 30;
-    public int yellowHigh = 50;
+    public int orangeLow = 30;
+    public int orangeHigh = 50;
 
     public int magentaLow = 210;
     public int magentaHigh = 235;
@@ -70,14 +70,14 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
         double[] averageArray = average.toArray();
         double averageDouble = averageArray[0];
         // Determining the color of the cropped mat based on the average
-        if ((averageDouble >= yellowLow) && (averageDouble <= yellowHigh)) {
+        if ((averageDouble >= orangeLow) && (averageDouble <= orangeHigh)) {
             return 0;
         } else if ((averageDouble >= magentaLow) && (averageDouble <= magentaHigh)) {
             return 1;
         } else if ((averageDouble >= greenLow) && (averageDouble <= greenHigh)) {
             return 2;
         }
-        return copColor;
+        return -1;
     }
 
     public int getCopColor() {
@@ -86,6 +86,7 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
+
         copColor = -1;
 
         Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL); //Convert to HSV
