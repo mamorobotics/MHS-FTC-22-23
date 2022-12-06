@@ -58,16 +58,16 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
 
         TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                 .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
-                .back(48)
-                .turn(Math.toRadians(-45))
+                .lineToSplineHeading(new Pose2d(36, 36, Math.toRadians(-45)))
                 .waitSeconds(0.5)
-                .turn(Math.toRadians(45))
                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                 .forward(20)
                 .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(48, 12, Math.toRadians(0)))
-                .turn(Math.toRadians(90))
+                .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(36, 24, Math.toRadians(0)))
                 .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(36, 36, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60, 12, Math.toRadians(180)))
                 .build();
         drive.followTrajectorySequence(baseSeq);
         /*TrajectorySequence seq1 = drive.trajectorySequenceBuilder(new Pose2d(48,12, Math.toRadians(270)))
