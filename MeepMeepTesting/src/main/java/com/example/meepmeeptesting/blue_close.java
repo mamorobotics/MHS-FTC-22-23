@@ -15,10 +15,8 @@ public class blue_close {
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(36,62,Math.toRadians(270)))
                                 .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
-                                .back(48)
-                                .turn(Math.toRadians(-45))
+                                .lineToSplineHeading(new Pose2d(36, 36, Math.toRadians(-45)))
                                 .waitSeconds(0.5)
-                                .turn(Math.toRadians(45))
                                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                                 .forward(20)
                                 .waitSeconds(0.5)
