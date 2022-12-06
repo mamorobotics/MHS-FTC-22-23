@@ -45,17 +45,11 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
 
 
         while (!opModeIsActive() && !isStopRequested()) {
-            cupSide = detector.getCopColor();
-            String cupColor = "**Add Colors**";
-            if(cupSide == 0) {
-                cupColor = "0";
+            int cupColor = -1;
+            if(detector.getCopColor() != -1 && cupColor == -1) {
+                cupColor = detector.getCopColor();
             }
-            if(cupSide == 1) {
-                cupColor = "1";
-            }
-            if(cupSide == 2) {
-                cupColor = "2";
-            }
+
             telemetry.addData("Cup Color", cupColor);
             telemetry.update();
             sleep(100);

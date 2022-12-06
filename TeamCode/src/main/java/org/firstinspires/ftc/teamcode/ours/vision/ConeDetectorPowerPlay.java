@@ -36,14 +36,14 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
     public int cupHeight = 60;
     
     // Ranges of the colors
-    public int orangeLow = 30;
-    public int orangeHigh = 50;
+    public double orangeLow = 30;
+    public double orangeHigh = 50;
 
-    public int magentaLow = 210;
-    public int magentaHigh = 235;
+    public double magentaLow = 210;
+    public double magentaHigh = 235;
 
-    public int greenLow = 80;
-    public int greenHigh = 100;
+    public double greenLow = 80;
+    public double greenHigh = 100;
 
     public double blurConstant = 1;
     public double dilationConstant = 2;
