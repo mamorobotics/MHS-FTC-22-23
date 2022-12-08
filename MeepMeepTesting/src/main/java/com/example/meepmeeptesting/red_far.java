@@ -15,29 +15,22 @@ public class red_far {
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(36,-62,Math.toRadians(90)))
                                 .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(90)))
-                                .back(48)
-                                .turn(Math.toRadians(45))
+                                .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(90)))
+                                .turn(Math.toRadians(135))
                                 .waitSeconds(0.5)
-                                .turn(Math.toRadians(-45))
-                                .lineToLinearHeading(new Pose2d(36, -12, Math.toRadians(0)))
+                                .turn(Math.toRadians(135))
                                 .forward(20)
                                 .waitSeconds(0.5)
-                                .lineToLinearHeading(new Pose2d(48, -12, Math.toRadians(270)))
+                                .lineToLinearHeading(new Pose2d(36, -12, Math.toRadians(0)))
+                                .turn(Math.toRadians(-135))
                                 .waitSeconds(0.5)
-                                //substation
-//                                .lineToLinearHeading(new Pose2d(12,-12,Math.toRadians(270)))
-//                                .lineToLinearHeading(new Pose2d(12, -62, Math.toRadians(90)))
-                                //one
-//                                .lineToLinearHeading(new Pose2d(36, -12, Math.toRadians(270)))
-//                                .lineToLinearHeading(new Pose2d(36, -36, Math.toRadians(270)))
-//                                .lineToLinearHeading(new Pose2d(60, -36, Math.toRadians(180)))
-                                //two
-//                                .lineToLinearHeading(new Pose2d(36, -12, Math.toRadians(270)))
-//                                .lineToLinearHeading(new Pose2d(36, -36, Math.toRadians(90)))
+                                .turn(Math.toRadians(45))
+                                .lineToSplineHeading((new Pose2d(36,-36,Math.toRadians(270))))
+                                // two [already there]
+                                // one
+                                .lineToLinearHeading(new Pose2d(12, -36, Math.toRadians(270)))
                                 //three
-//                                .lineToLinearHeading(new Pose2d(12,-12, Math.toRadians(270)))
-//                                .lineToLinearHeading(new Pose2d(12, -36, Math.toRadians(90)))
-
+                                .lineToLinearHeading(new Pose2d(62, -36, Math.toRadians(270)))
                                 .build()
                         );
 
