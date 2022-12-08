@@ -4,6 +4,6 @@
 !build.common.gradle
 !build.dependencies.gradle
 !build.gradle
-!TeamCode/
-!FtcRobotController/
-!MeepMeepTesting/
+!TeamCode/src/
+!FtcRobotController/src/
+!MeepMeepTesting/src/
