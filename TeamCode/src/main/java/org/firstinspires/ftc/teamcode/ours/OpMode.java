@@ -8,7 +8,12 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 @ com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class OpMode extends LinearOpMode {
     static DcMotor FL, BL, FR, BR;
+    //static DcMotor LM;
+    //static Servo clawServo;
+    //static Servo clawControlServo;
     static double speed = 1;
+
+    static boolean aPressed, clawToggle = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -17,10 +22,16 @@ public class OpMode extends LinearOpMode {
         FR = hardwareMap.get(DcMotor.class, "rightFront");
         BR = hardwareMap.get(DcMotor.class, "rightRear");
 
+        //LM = hardwareMap.get(DcMotor.class, "liftMotor");
+        //clawServo = hardwareMap.get(Servo.class, "clawServo");
+        //clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
+
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        //LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -28,9 +39,26 @@ public class OpMode extends LinearOpMode {
         waitForStart();
         
         while (opModeIsActive()){
+            telemetry.addData("Claw Toggle", clawToggle);
             telemetry.addData("X", -gamepad1.left_stick_y);
             telemetry.addData("Y", gamepad1.left_stick_x);
             telemetry.update();
+
+            if(gamepad2.a) {
+                if (!aPressed) {
+                    //Toggled on
+                    //clawServo.setPosition(90);
+                }
+                aPressed = true;
+            } else {
+                //Toggled off
+                aPressed = false;
+                //clawServo.setPosition(0);
+            }
+
+            /*if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
+                LM.setPower(gamepad2.left_stick_y);
+            }*/
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
