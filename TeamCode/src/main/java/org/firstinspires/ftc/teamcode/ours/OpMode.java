@@ -56,12 +56,25 @@ public class OpMode extends LinearOpMode {
                 //clawServo.setPosition(0);
             }
 
+            double[] angles = calcArmAngles(4, 4, 4);
+
             /*if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
                 LM.setPower(gamepad2.left_stick_y);
             }*/
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
+    }
+
+    public static double[] calcArmAngles(double x, double y, double length){
+        double[] out = new double[3];
+
+        double lengthPoint = Math.sqrt(x*x+y*y);
+
+        out[0] = Math.toDegrees(Math.acos(Math.toRadians((lengthPoint * lengthPoint)/(2 * length * lengthPoint))) + Math.atan(Math.toRadians(y/x)));
+        out[1] = Math.toDegrees(Math.acos(Math.toRadians((2 * length * length - lengthPoint)/(4 * length))));
+        out[2] = Math.toDegrees(Math.acos(Math.toRadians((lengthPoint * lengthPoint)/(2 * length * lengthPoint))) + Math.atan(Math.toRadians(x/y)));
+        return out;
     }
 
     private static void move(double x, double y, double r, double speed){
