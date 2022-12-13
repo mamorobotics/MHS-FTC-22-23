@@ -1,6 +1,0 @@
-{
-  "sourcesPath": ".",
-  "resourcesPath": ".",
-  "excludedPaths": ["ObjectDetection.java", "TestPipeline.java"],
-  "excludedFileExtensions": []
-}

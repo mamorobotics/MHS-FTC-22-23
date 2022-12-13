@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
-  <Tracking>
-    <ImageTarget name="RedAudienceWall_E1_JetEngine" size="229.000000 163.522964" />
-    <ImageTarget name="RedRearWall_E6_PowerLines" size="229.000000 163.607773" />
-    <ImageTarget name="BlueAudienceWall_B1_Wires" size="229.000000 163.522964" />
-    <ImageTarget name="BlueRearWall_B6_Circuit" size="229.000000 163.607773" />
-  </Tracking>
-</QCARConfig>
