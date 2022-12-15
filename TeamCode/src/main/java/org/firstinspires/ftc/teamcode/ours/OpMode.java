@@ -7,12 +7,11 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @ com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class OpMode extends LinearOpMode {
-    //static DcMotor FL, BL, FR, BR;
+    static DcMotor FL, BL, FR, BR;
+
     //static DcMotor LM;
     //static Servo clawServo;
     //static Servo clawControlServo;
-
-    static Servo testOne, testTwo;
 
     static double speed = 1;
 
@@ -22,15 +21,12 @@ public class OpMode extends LinearOpMode {
 
     @Override
     public void runOpMode() throws InterruptedException {
-        /*FL = hardwareMap.get(DcMotor.class, "leftFront");
+        FL = hardwareMap.get(DcMotor.class, "leftFront");
         BL = hardwareMap.get(DcMotor.class, "leftRear");
         FR = hardwareMap.get(DcMotor.class, "rightFront");
-        BR = hardwareMap.get(DcMotor.class, "rightRear");*/
+        BR = hardwareMap.get(DcMotor.class, "rightRear");
 
-        testOne = hardwareMap.get(Servo.class, "testOne");
-        testTwo = hardwareMap.get(Servo.class, "testTwo");
-
-        /*//LM = hardwareMap.get(DcMotor.class, "liftMotor");
+        //LM = hardwareMap.get(DcMotor.class, "liftMotor");
         //clawServo = hardwareMap.get(Servo.class, "clawServo");
         //clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
 
@@ -42,7 +38,7 @@ public class OpMode extends LinearOpMode {
         //LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         FL.setDirection(DcMotor.Direction.REVERSE);
-        BL.setDirection(DcMotor.Direction.REVERSE);*/
+        BL.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         
@@ -67,14 +63,12 @@ public class OpMode extends LinearOpMode {
             x += gamepad2.left_stick_x;
 
             double[] angles = calcArmAngles(x, 4, 4);
-            testOne.setPosition(angles[0]);
-            testTwo.setPosition(angles[1]);
 
             /*if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
                 LM.setPower(gamepad2.left_stick_y);
             }*/
 
-            //move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
+            move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
     }
 
@@ -86,7 +80,7 @@ public class OpMode extends LinearOpMode {
         return out;
     }
 
-    /*private static void move(double x, double y, double r, double speed){
+    private static void move(double x, double y, double r, double speed){
         double denominator = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(r), 1);
         double frontLeftPower = (y + x + r) * speed / denominator;
         double backLeftPower = (y - x + r) * speed / denominator;
@@ -97,5 +91,5 @@ public class OpMode extends LinearOpMode {
         BL.setPower(backLeftPower);
         FR.setPower(frontRightPower);
         BR.setPower(backRightPower);
-    }*/
+    }
 }
