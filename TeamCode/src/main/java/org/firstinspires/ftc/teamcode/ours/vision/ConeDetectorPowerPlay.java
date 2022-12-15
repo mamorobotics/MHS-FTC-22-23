@@ -36,16 +36,16 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
     public int cupHeight = 60;
     
     // Ranges of the colors
-    public int orangeLow = 26;
-    public int orangeHigh = 55;
+    public double orangeLow = 30;
+    public double orangeHigh = 50;
 
-    public int magentaLow = 225;
-    public int magentaHigh = 244;
+    public double magentaLow = 210;
+    public double magentaHigh = 235;
 
-    public int greenLow = 86;
-    public int greenHigh = 150;
+    public double greenLow = 80;
+    public double greenHigh = 100;
 
-    public double blurConstant = 5;
+    public double blurConstant = 1;
     public double dilationConstant = 2;
 
     // Constructor
@@ -86,6 +86,7 @@ public class ConeDetectorPowerPlay extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
+
         copColor = -1;
 
         Imgproc.cvtColor(input, HSVMat, Imgproc.COLOR_RGB2HSV_FULL); //Convert to HSV

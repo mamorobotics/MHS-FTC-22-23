@@ -1692,7 +1692,6 @@ int string packageName 0x0
 int string packageNameDriverStation 0x0
 int string packageNameRobotController 0x0
 int string pairing_kind_title 0x0
-int string parametersForOtherDeviceUsed 0x0
 int string passphrase_label 0x0
 int string passwordLabel 0x0
 int string peerStatusConnected 0x0
@@ -1987,7 +1986,6 @@ int string userSensorTypeBusDefault 0x0
 int string view_logs_activity 0x0
 int string warning2_4GhzUnnecessaryUsage 0x0
 int string warning2_4GhzUnnecessaryUsageWiFiDirectAuto 0x0
-int string warningAttemptedToUseBhi260OnOldOS 0x0
 int string warningBothAppsObsolete 0x0
 int string warningBothClocksBehind 0x0
 int string warningChOsObsolete 0x0
@@ -2001,7 +1999,6 @@ int string warningMismatchedAppVersions 0x0
 int string warningProblemCommunicatingWithUSBDevice 0x0
 int string warningRcAppObsolete 0x0
 int string warningRcClockBehind 0x0
-int string warningRetrievedMultipleDeviceInstances 0x0
 int string warningTtsFailedToInitialize 0x0
 int string warningUSBDeviceDetached 0x0
 int string warningUnableToOpen 0x0

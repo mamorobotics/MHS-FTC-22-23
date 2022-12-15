@@ -707,7 +707,7 @@
     <string name="display_server_log_button">Display Server Log</string>
     <string name="driverHubOsVersionLabel">Driver Hub OS Version:</string>
     <string name="driverStationLabel">Driver Station:</string>
-    <string name="dsVersionMismatch">No, the DS version is %1$d.%2$d</string>
+    <string name="dsVersionMismatch">No, the DS version is %d.%d</string>
     <string name="duplicateWebcam">Multiple webcams found with serial number %1$s.</string>
     <string name="duplicateWebcamWithName">Multiple webcams found with serial number of \"%1$s\" (%2$s).</string>
     <string name="edit_analog_input_devices_activity">Edit Analog Input Devices</string>
@@ -882,7 +882,6 @@
     <string name="packageNameDriverStation" translatable="false">com.qualcomm.ftcdriverstation</string>
     <string name="packageNameRobotController" translatable="false">com.qualcomm.ftcrobotcontroller</string>
     <string name="pairing_kind_title">"Pairing Method"</string>
-    <string name="parametersForOtherDeviceUsed">An IMU parameters object was used that is intended for a different physical IMU type.</string>
     <string name="passphrase_label">Use the following passphrase to gain access to the network:</string>
     <string name="passwordLabel">RC Password:</string>
     <string name="peerStatusConnected">connected</string>
@@ -1194,7 +1193,6 @@
     <string name="view_logs_activity">View Logs</string>
     <string name="warning2_4GhzUnnecessaryUsage">Both the Robot Controller and Driver Station support 5 GHz. You should consider selecting a 5 GHz Wi-Fi channel.</string>
     <string name="warning2_4GhzUnnecessaryUsageWiFiDirectAuto">Both the Robot Controller and Driver Station support 5 GHz. You should consider selecting a specific 5 GHz Wi-Fi channel (auto generally selects a 2.4 GHz channel).</string>
-    <string name="warningAttemptedToUseBhi260OnOldOS">To ensure correct operation of the IMU in this Control Hub, update to Control Hub OS 1.1.3 or later</string>
     <string name="warningBothAppsObsolete">The Robot Controller and Driver Station apps are both obsolete. You should install the new versions for this FTC season.</string>
     <string name="warningBothClocksBehind">Both the Robot Controller and Driver Station clocks are behind. Please set the clocks to the correct time.</string>
     <string name="warningChOsObsolete">The Control Hub OS does not meet the minimum requirement for this FTC season. Update to Control Hub OS %s or later.</string>
@@ -1208,7 +1206,6 @@
     <string name="warningProblemCommunicatingWithUSBDevice">Problem communicating with %s.</string>
     <string name="warningRcAppObsolete">The Robot Controller app is obsolete. You should install the new version for this FTC season.</string>
     <string name="warningRcClockBehind">The Robot Controller\'s clock is behind. Please set the clock to the correct time.</string>
-    <string name="warningRetrievedMultipleDeviceInstances">Multiple drivers were used to access device \"%1$s\". This may result in unexpected behavior.</string>
     <string name="warningTtsFailedToInitialize">Text-to-speech failed to initialize.</string>
     <string name="warningUSBDeviceDetached">%s detached.</string>
     <string name="warningUnableToOpen">Unable to open %s.</string>

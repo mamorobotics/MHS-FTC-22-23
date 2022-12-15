@@ -841,6 +841,7 @@ function downloadBlocks(blkFileContent) {
   var a = document.getElementById('download_link');
   a.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(blkFileContent);
   a.download = currentProjectName + '.blk';
+  a.target = '_blank';
   a.click();
 }
 
@@ -949,6 +950,7 @@ function downloadImageButtonClicked() {
       var a = document.getElementById('download_link');
       a.href = URL.createObjectURL(blob);
       a.download = currentProjectName + '.png';
+      a.target = '_blank';
       a.click();
     });
   };
