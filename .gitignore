@@ -1,9 +1,1 @@
-/*
-
-!.gitignore
-!build.common.gradle
-!build.dependencies.gradle
-!build.gradle
-!TeamCode/src/
-!FtcRobotController/src/
-!MeepMeepTesting/src/
+local.properties
