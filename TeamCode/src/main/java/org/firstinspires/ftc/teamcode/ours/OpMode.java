@@ -9,9 +9,9 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class OpMode extends LinearOpMode {
     static DcMotor FL, BL, FR, BR;
 
-    //static DcMotor LM;
-    //static Servo clawServo;
-    //static Servo clawControlServo;
+    static DcMotor LM;
+    static Servo clawServo;
+    static Servo clawControlServo;
 
     static double speed = 1;
 
@@ -26,16 +26,16 @@ public class OpMode extends LinearOpMode {
         FR = hardwareMap.get(DcMotor.class, "rightFront");
         BR = hardwareMap.get(DcMotor.class, "rightRear");
 
-        //LM = hardwareMap.get(DcMotor.class, "liftMotor");
-        //clawServo = hardwareMap.get(Servo.class, "clawServo");
-        //clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
+        LM = hardwareMap.get(DcMotor.class, "liftMotor");
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
 
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -51,22 +51,22 @@ public class OpMode extends LinearOpMode {
             if(gamepad2.a) {
                 if (!aPressed) {
                     //Toggled on
-                    //clawServo.setPosition(90);
+                    clawServo.setPosition(90);
                 }
                 aPressed = true;
             } else {
                 //Toggled off
                 aPressed = false;
-                //clawServo.setPosition(0);
+                clawServo.setPosition(0);
             }
 
             x += gamepad2.left_stick_x;
 
             double[] angles = calcArmAngles(x, 4, 4);
 
-            /*if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
+            if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
                 LM.setPower(gamepad2.left_stick_y);
-            }*/
+            }
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
@@ -75,8 +75,8 @@ public class OpMode extends LinearOpMode {
     public static double[] calcArmAngles(double x, double y, double length){
         double[] out = new double[2];
 
-        out[1] = Math.acos((x*x+y*y-2*length)/(2*length*length));
-        out[0] = Math.atan(y/x)-Math.atan((length*Math.sin(out[1]))/(length+length*Math.cos(out[1])));
+        out[1] = -Math.acos((Math.pow(x, 2) + Math.pow(y, 2) - Math.pow(length, 2) - Math.pow(length, 2)) / (2 * length * length));
+        out[0] = Math.atan(y / x) - Math.atan((length * Math.sin(out[1])) / (length + length * Math.cos(out[1])));
         return out;
     }
 
