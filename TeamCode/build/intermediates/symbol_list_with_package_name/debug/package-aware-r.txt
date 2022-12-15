@@ -1700,6 +1700,7 @@ string packageName
 string packageNameDriverStation
 string packageNameRobotController
 string pairing_kind_title
+string parametersForOtherDeviceUsed
 string passphrase_label
 string passwordLabel
 string peerStatusConnected
@@ -1994,6 +1995,7 @@ string userSensorTypeBusDefault
 string view_logs_activity
 string warning2_4GhzUnnecessaryUsage
 string warning2_4GhzUnnecessaryUsageWiFiDirectAuto
+string warningAttemptedToUseBhi260OnOldOS
 string warningBothAppsObsolete
 string warningBothClocksBehind
 string warningChOsObsolete
@@ -2007,6 +2009,7 @@ string warningMismatchedAppVersions
 string warningProblemCommunicatingWithUSBDevice
 string warningRcAppObsolete
 string warningRcClockBehind
+string warningRetrievedMultipleDeviceInstances
 string warningTtsFailedToInitialize
 string warningUSBDeviceDetached
 string warningUnableToOpen

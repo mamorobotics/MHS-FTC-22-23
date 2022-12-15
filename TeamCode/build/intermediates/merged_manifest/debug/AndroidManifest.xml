@@ -7,8 +7,8 @@
 <!-- The package name here determines the package for your R class and your BuildConfig class -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.qualcomm.ftcrobotcontroller"
-    android:versionCode="47"
-    android:versionName="8.0" >
+    android:versionCode="49"
+    android:versionName="8.1.1" >
 
     <uses-sdk
         android:minSdkVersion="23"
@@ -103,11 +103,9 @@
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:extractNativeLibs="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
-        android:testOnly="true"
         android:theme="@style/AppThemeRedRC"
         android:usesCleartextTraffic="true" > <!-- Indicates to the ControlHubUpdater what the latest version of the Control Hub is that this app supports -->
         <meta-data
