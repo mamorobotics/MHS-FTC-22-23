@@ -10,14 +10,12 @@ public class OpMode extends LinearOpMode {
     static DcMotor FL, BL, FR, BR;
 
     static DcMotor LM;
-    static Servo clawServo;
-    static Servo clawControlServo;
+    /*static Servo clawServo;
+    static Servo clawControlServo;*/
 
     static double speed = 1;
 
-    static int x = 4;
-
-    static boolean aPressed, clawToggle = false;
+    //static boolean aPressed, clawToggle = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -27,8 +25,8 @@ public class OpMode extends LinearOpMode {
         BR = hardwareMap.get(DcMotor.class, "rightRear");
 
         LM = hardwareMap.get(DcMotor.class, "liftMotor");
-        clawServo = hardwareMap.get(Servo.class, "clawServo");
-        clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
+        /*clawServo = hardwareMap.get(Servo.class, "clawServo");
+        clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");*/
 
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -37,18 +35,20 @@ public class OpMode extends LinearOpMode {
 
         LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
 
         waitForStart();
         
         while (opModeIsActive()){
-            telemetry.addData("Claw Toggle", clawToggle);
+            //telemetry.addData("Claw Toggle", clawToggle);
             telemetry.addData("X", -gamepad1.left_stick_y);
             telemetry.addData("Y", gamepad1.left_stick_x);
             telemetry.update();
 
-            if(gamepad2.a) {
+            /*if(gamepad2.a) {
                 if (!aPressed) {
                     //Toggled on
                     clawServo.setPosition(90);
@@ -58,11 +58,9 @@ public class OpMode extends LinearOpMode {
                 //Toggled off
                 aPressed = false;
                 clawServo.setPosition(0);
-            }
+            }*/
 
-            x += gamepad2.left_stick_x;
-
-            double[] angles = calcArmAngles(x, 4, 4);
+            double[] angles = calcArmAngles(4, 4, 4);
 
             if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
                 LM.setPower(gamepad2.left_stick_y);
