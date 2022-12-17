@@ -9,8 +9,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class OpMode extends LinearOpMode {
     static DcMotor FL, BL, FR, BR;
 
-    /*static DcMotor LM;
-    static Servo clawServo;
+    static DcMotor LM;
+    /*static Servo clawServo;
     static Servo clawControlServo;*/
 
     static double speed = 1;
@@ -24,8 +24,8 @@ public class OpMode extends LinearOpMode {
         FR = hardwareMap.get(DcMotor.class, "rightFront");
         BR = hardwareMap.get(DcMotor.class, "rightRear");
 
-        /*LM = hardwareMap.get(DcMotor.class, "liftMotor");
-        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        LM = hardwareMap.get(DcMotor.class, "liftMotor");
+        /*clawServo = hardwareMap.get(Servo.class, "clawServo");
         clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");*/
 
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -33,9 +33,9 @@ public class OpMode extends LinearOpMode {
         BL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         BR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        /*LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);*/
+        //LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -65,6 +65,17 @@ public class OpMode extends LinearOpMode {
             if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
                 LM.setPower(gamepad2.left_stick_y);
             }*/
+
+            if(gamepad1.x) {
+                LM.setPower(-0.25);
+            }else{
+                LM.setPower(0);
+            }
+            if(gamepad1.y){
+                LM.setPower(0.25);
+            }else{
+                LM.setPower(0);
+            }
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
