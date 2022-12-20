@@ -10,12 +10,12 @@ public class OpMode extends LinearOpMode {
     static DcMotor FL, BL, FR, BR;
 
     static DcMotor LM;
-    /*static Servo clawServo;
-    static Servo clawControlServo;*/
+    static Servo clawServo;
+    //static Servo clawControlServo;
 
     static double speed = 1;
 
-    //static boolean aPressed, clawToggle = false;
+    static boolean aPressed, clawToggle = false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -25,8 +25,8 @@ public class OpMode extends LinearOpMode {
         BR = hardwareMap.get(DcMotor.class, "rightRear");
 
         LM = hardwareMap.get(DcMotor.class, "liftMotor");
-        /*clawServo = hardwareMap.get(Servo.class, "clawServo");
-        clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");*/
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        //clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
 
         FL.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         FR.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -44,13 +44,13 @@ public class OpMode extends LinearOpMode {
         waitForStart();
         
         while (opModeIsActive()){
-            //telemetry.addData("Claw Toggle", clawToggle);
+            telemetry.addData("Claw Toggle", clawToggle);
             telemetry.addData("X", -gamepad1.left_stick_y);
             telemetry.addData("Y", gamepad1.left_stick_x);
             telemetry.addData("Current Pos", LM.getCurrentPosition());
             telemetry.update();
 
-            /*if(gamepad2.a) {
+            if(gamepad2.a) {
                 if (!aPressed) {
                     //Toggled on
                     clawServo.setPosition(90);
@@ -60,7 +60,7 @@ public class OpMode extends LinearOpMode {
                 //Toggled off
                 aPressed = false;
                 clawServo.setPosition(0);
-            }*/
+            }
 
             //double[] angles = calcArmAngles(4, 4, 4);
 
