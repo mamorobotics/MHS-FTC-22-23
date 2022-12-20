@@ -13,8 +13,6 @@ public class OpMode extends LinearOpMode {
 
     static double speed = 1;
 
-    static boolean aPressed, clawToggle = false;
-
     @Override
     public void runOpMode() throws InterruptedException {
         FL = hardwareMap.get(DcMotor.class, "leftFront");
@@ -42,29 +40,22 @@ public class OpMode extends LinearOpMode {
         waitForStart();
         
         while (opModeIsActive()){
-            telemetry.addData("Claw Toggle", clawToggle);
             telemetry.addData("X", -gamepad1.left_stick_y);
             telemetry.addData("Y", gamepad1.left_stick_x);
             telemetry.addData("Current Pos", LM.getCurrentPosition());
             telemetry.update();
 
-            if(gamepad2.a) {
-                if (!aPressed) {
-                    //Toggled on
-                    clawServo.setPosition(90);
-                }
-                aPressed = true;
+            if(gamepad2.right_trigger > 0.1) {
+                clawServo.setPosition(.25);
             } else {
-                //Toggled off
-                aPressed = false;
                 clawServo.setPosition(0);
             }
 
             //double[] angles = calcArmAngles(4, 4, 4);
 
             if(LM.getCurrentPosition() >= 0) {
-                LM.setPower(-0.1);
-            } else if(LM.getCurrentPosition() <= -4450) {
+                LM.setPower(-0.2);
+            } else if(LM.getCurrentPosition() <= -3700) {
                 if (gamepad2.left_stick_y > 0) {
                     LM.setPower(gamepad2.left_stick_y);
                 }
