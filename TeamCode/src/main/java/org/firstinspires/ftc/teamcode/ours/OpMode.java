@@ -66,6 +66,8 @@ public class OpMode extends LinearOpMode {
 
             if(LM.getCurrentPosition() <= 0) {
                 LM.setPower(0.1);
+            } else if(LM.getCurrentPosition() >= 4450) {
+                LM.setPower(-Math.abs(gamepad2.left_stick_y));
             } else {
                 LM.setPower(-gamepad2.left_stick_y);
             }
