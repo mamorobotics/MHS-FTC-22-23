@@ -35,7 +35,8 @@ public class OpMode extends LinearOpMode {
 
         LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        //LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LM.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         FL.setDirection(DcMotor.Direction.REVERSE);
         BL.setDirection(DcMotor.Direction.REVERSE);
@@ -46,6 +47,7 @@ public class OpMode extends LinearOpMode {
             //telemetry.addData("Claw Toggle", clawToggle);
             telemetry.addData("X", -gamepad1.left_stick_y);
             telemetry.addData("Y", gamepad1.left_stick_x);
+            telemetry.addData("Current Pos", LM.getCurrentPosition());
             telemetry.update();
 
             /*if(gamepad2.a) {
@@ -60,21 +62,12 @@ public class OpMode extends LinearOpMode {
                 clawServo.setPosition(0);
             }*/
 
-            /*double[] angles = calcArmAngles(4, 4, 4);
+            //double[] angles = calcArmAngles(4, 4, 4);
 
-            if(LM.getCurrentPosition() > 0 && LM.getCurrentPosition() < 100) {
-                LM.setPower(gamepad2.left_stick_y);
-            }*/
-
-            if(gamepad1.x) {
-                LM.setPower(-0.25);
-            }else{
-                LM.setPower(0);
-            }
-            if(gamepad1.y){
-                LM.setPower(0.25);
-            }else{
-                LM.setPower(0);
+            if(LM.getCurrentPosition() <= 0) {
+                LM.setPower(0.1);
+            } else {
+                LM.setPower(-gamepad2.left_stick_y);
             }
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
