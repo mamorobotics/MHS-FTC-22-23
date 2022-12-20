@@ -3,8 +3,6 @@ package org.firstinspires.ftc.teamcode.ours;
 import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 @ com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class OpMode extends LinearOpMode {
     static DcMotor FL, BL, FR, BR;
@@ -64,12 +62,10 @@ public class OpMode extends LinearOpMode {
 
             //double[] angles = calcArmAngles(4, 4, 4);
 
-            if(LM.getCurrentPosition() <= 0) {
-                LM.setPower(0.1);
-            } else if(LM.getCurrentPosition() >= 4450) {
-                LM.setPower(-Math.abs(gamepad2.left_stick_y));
+            if(LM.getCurrentPosition() >= 0) {
+                LM.setPower(-0.1);
             } else {
-                LM.setPower(-gamepad2.left_stick_y);
+                LM.setPower(gamepad2.left_stick_y);
             }
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
