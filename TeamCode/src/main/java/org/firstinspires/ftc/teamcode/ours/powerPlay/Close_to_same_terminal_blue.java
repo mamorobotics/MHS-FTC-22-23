@@ -64,18 +64,40 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
         waitForStart();
 
         TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
-                .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(-2000);
                     LM.setPower(-1);
                 })
-                .lineToSplineHeading(new Pose2d(36, 36, Math.toRadians(-45)))
+                .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
+                .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(-3500);
+                    LM.setPower(-1);
+                })
+                .turn(Math.toRadians(-45))
+                .waitSeconds(0.5)
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(0);
+                    LM.setPower(1);
+                })
+                .turn(Math.toRadians(135))
+                .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
+                .waitSeconds(0.5)
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(-3500);
+                    LM.setPower(-1);
+                })
                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(36,32, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(36, 24, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(36, 36, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(60, 12, Math.toRadians(180)))
+                .turn(Math.toRadians(-135))
+                .waitSeconds(0.5)
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(0);
+                    LM.setPower(1);
+                })
+                .turn(Math.toRadians(-45))
+                .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(90))))
+                .lineToLinearHeading(new Pose2d(12, 36, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(62, 36, Math.toRadians(90)))
                 .build();
         drive.followTrajectorySequence(baseSeq);
         /*TrajectorySequence seq1 = drive.trajectorySequenceBuilder(new Pose2d(48,12, Math.toRadians(270)))
