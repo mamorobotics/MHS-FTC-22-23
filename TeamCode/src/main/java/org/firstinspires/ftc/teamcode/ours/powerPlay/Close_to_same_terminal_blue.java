@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.ours.powerPlay;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -18,9 +19,15 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
     int cupSide = 3;
     OpenCvCamera webcam;
     ConeDetectorPowerPlay detector = new ConeDetectorPowerPlay(telemetry);
+    static DcMotor LM;
 
     @Override
     public void runOpMode() throws InterruptedException {
+        LM = hardwareMap.get(DcMotor.class, "liftMotor");
+        LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         webcam.setPipeline(detector);
@@ -58,14 +65,15 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
 
         TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                 .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(-2000);
+                    LM.setPower(-1);
+                })
                 .lineToSplineHeading(new Pose2d(36, 36, Math.toRadians(-45)))
-                .waitSeconds(0.5)
                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                .forward(20)
-                .waitSeconds(0.5)
+                .lineToLinearHeading(new Pose2d(36,32, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(36, 24, Math.toRadians(0)))
-                .waitSeconds(0.5)
                 .lineToLinearHeading(new Pose2d(36, 36, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(60, 12, Math.toRadians(180)))
                 .build();
