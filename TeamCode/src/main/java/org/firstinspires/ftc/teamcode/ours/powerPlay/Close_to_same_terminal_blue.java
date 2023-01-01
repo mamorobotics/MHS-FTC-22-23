@@ -26,7 +26,6 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
         LM = hardwareMap.get(DcMotor.class, "liftMotor");
         LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -65,19 +64,22 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
 
         TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                 .addDisplacementMarker(() -> {
-                    LM.setTargetPosition(-2000);
+                    LM.setTargetPosition(0);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(-1);
                 })
                 .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                 .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(-3500);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(-1);
                 })
                 .turn(Math.toRadians(-45))
                 .waitSeconds(0.5)
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(0);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(1);
                 })
                 .turn(Math.toRadians(135))
@@ -85,6 +87,7 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
                 .waitSeconds(0.5)
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(-3500);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(-1);
                 })
                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
@@ -92,12 +95,29 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
                 .waitSeconds(0.5)
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(0);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LM.setPower(1);
+                })
+                .turn(Math.toRadians(135))
+                .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
+                .waitSeconds(0.5)
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(-3500);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    LM.setPower(-1);
+                })
+                .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
+                .turn(Math.toRadians(-135))
+                .waitSeconds(0.5)
+                .addDisplacementMarker(() -> {
+                    LM.setTargetPosition(0);
+                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(1);
                 })
                 .turn(Math.toRadians(-45))
                 .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(90))))
                 .lineToLinearHeading(new Pose2d(12, 36, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(62, 36, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(61, 36, Math.toRadians(90)))
                 .build();
         drive.followTrajectorySequence(baseSeq);
         /*TrajectorySequence seq1 = drive.trajectorySequenceBuilder(new Pose2d(48,12, Math.toRadians(270)))
