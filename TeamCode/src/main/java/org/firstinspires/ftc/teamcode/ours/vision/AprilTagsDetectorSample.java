@@ -21,6 +21,7 @@
 
 package org.firstinspires.ftc.teamcode.ours.vision;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -32,7 +33,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@TeleOp
+@Autonomous(name = "test_pipeline")
 public class AprilTagsDetectorSample extends LinearOpMode
 {
     OpenCvCamera camera;
@@ -167,13 +168,13 @@ public class AprilTagsDetectorSample extends LinearOpMode
 
         /* Actually do something useful */
         if(tagOfInterest == null){
-            //default trajectory here if preferred
+            telemetry.addData("non", 0);
         }else if(tagOfInterest.id == LEFT){
-            //left trajectory
+            telemetry.addData("left",1);
         }else if(tagOfInterest.id == MIDDLE){
-            //middle trajectory
+            telemetry.addData("middle",2);
         }else{
-            //right trajectory
+            telemetry.addData("right",3);
         }
 
     }
