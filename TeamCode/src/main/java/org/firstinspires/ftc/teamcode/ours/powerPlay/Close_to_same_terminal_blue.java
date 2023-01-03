@@ -75,14 +75,15 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
                     LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(-1);
                 })
-                .turn(Math.toRadians(-45))
+                .splineToLinearHeading(new Pose2d(24, 0, Math.toRadians(225)), Math.toRadians(0))
                 .waitSeconds(0.5)
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(0);
                     LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(1);
                 })
-                .turn(Math.toRadians(135))
+                .splineToLinearHeading(new Pose2d(36, 12, Math.toRadians(270)), Math.toRadians(0))
+                .turn(Math.toRadians(90))
                 .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
                 .waitSeconds(0.5)
                 .addDisplacementMarker(() -> {
@@ -91,33 +92,18 @@ public class Close_to_same_terminal_blue extends LinearOpMode {
                     LM.setPower(-1);
                 })
                 .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                .turn(Math.toRadians(-135))
+                .turn(Math.toRadians(-90))
+                .splineToLinearHeading(new Pose2d(24, 0, Math.toRadians(225)), Math.toRadians(0))
                 .waitSeconds(0.5)
                 .addDisplacementMarker(() -> {
                     LM.setTargetPosition(0);
                     LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     LM.setPower(1);
                 })
-                .turn(Math.toRadians(135))
-                .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
-                .waitSeconds(0.5)
-                .addDisplacementMarker(() -> {
-                    LM.setTargetPosition(-3500);
-                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LM.setPower(-1);
-                })
-                .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                .turn(Math.toRadians(-135))
-                .waitSeconds(0.5)
-                .addDisplacementMarker(() -> {
-                    LM.setTargetPosition(0);
-                    LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    LM.setPower(1);
-                })
-                .turn(Math.toRadians(-45))
-                .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(90))))
-                .lineToLinearHeading(new Pose2d(12, 36, Math.toRadians(90)))
-                .lineToLinearHeading(new Pose2d(61, 36, Math.toRadians(90)))
+                .splineToLinearHeading(new Pose2d(36, 12, Math.toRadians(270)), Math.toRadians(0))
+                .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(270))))
+                .lineToLinearHeading(new Pose2d(12, 36, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(61, 36, Math.toRadians(270)))
                 .build();
         drive.followTrajectorySequence(baseSeq);
         /*TrajectorySequence seq1 = drive.trajectorySequenceBuilder(new Pose2d(48,12, Math.toRadians(270)))
