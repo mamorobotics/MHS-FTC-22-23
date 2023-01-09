@@ -20,16 +20,16 @@ public class armAngleFinder extends LinearOpMode{
             u.setPosition(a2);
 
             if(gamepad1.dpad_up){
-                a1+=0.005;
+                a1+=0.001;
             }
             if(gamepad1.dpad_down){
-                a1-=0.005;
+                a1-=0.001;
             }
             if(gamepad1.dpad_left){
-                a2+=0.005;
+                a2+=0.001;
             }
             if(gamepad1.dpad_right){
-                a2-=0.005;
+                a2-=0.001;
             }
             telemetry.addData("a1: ", a1);
             telemetry.addData("a2", a2);
