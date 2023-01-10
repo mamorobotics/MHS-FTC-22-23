@@ -53,6 +53,24 @@ public class OpMode extends LinearOpMode {
             arm1.setPosition(arm1.getPosition() + (gamepad2.left_stick_y / 100));
             arm2.setPosition(arm2.getPosition() + (gamepad2.right_stick_y / 100));
 
+            if(gamepad2.dpad_up) {
+                arm1.setPosition(0);
+                arm2.setPosition(0);
+            }
+            if(gamepad2.dpad_down) {
+                arm1.setPosition(0);
+                arm2.setPosition(0);
+            }
+            if(gamepad2.dpad_left) {
+                arm1.setPosition(0);
+                arm2.setPosition(0);
+            }
+            if(gamepad2.dpad_down) {
+                arm1.setPosition(0);
+                arm2.setPosition(0);
+            }
+
+
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
     }
