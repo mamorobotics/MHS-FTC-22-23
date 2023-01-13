@@ -9,7 +9,7 @@ public class OpMode extends LinearOpMode {
 
     static Servo arm1, arm2, clawControlServo, clawServo;
 
-    static double speed = 1;
+    static double speed = 0.5;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -50,29 +50,33 @@ public class OpMode extends LinearOpMode {
                 clawServo.setPosition(0);
             }
 
-            arm1.setPosition(clamp(arm1.getPosition() + (gamepad2.left_stick_y / 100), 0, 1));
-            arm2.setPosition(clamp(arm2.getPosition() + (gamepad2.right_stick_y / 100), 0, 1));
 
-            //Cone Pickup
-            if(gamepad2.dpad_up) {
-                arm1.setPosition(0.47);
-                arm2.setPosition(0);
+            //Pickup
+            if(gamepad2.dpad_right) {
                 clawControlServo.setPosition(0.1);
+                sleep(1750);
+                arm2.setPosition(0);
+                arm1.setPosition(0.43);
             }
             //High Pole
-            if(gamepad2.dpad_down) {
+            if(gamepad2.dpad_up) {
                 arm1.setPosition(0);
-                arm2.setPosition(0);
-                clawControlServo.setPosition(0);
+                arm2.setPosition(0.3);
+                clawControlServo.setPosition(0.7);
             }
             //Medium Pole
             if(gamepad2.dpad_left) {
-                arm1.setPosition(0);
+                arm1.setPosition(0.05);
                 arm2.setPosition(0);
-                clawControlServo.setPosition(0);
+                clawControlServo.setPosition(0.38);
             }
             //Low Pole
             if(gamepad2.dpad_down) {
+                arm1.setPosition(0.2);
+                arm2.setPosition(0);
+                clawControlServo.setPosition(0.25);
+            }
+            if(gamepad2.x) {
                 arm1.setPosition(0);
                 arm2.setPosition(0);
                 clawControlServo.setPosition(0);
