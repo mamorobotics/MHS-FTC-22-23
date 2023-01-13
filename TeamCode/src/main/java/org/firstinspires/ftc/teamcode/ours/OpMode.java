@@ -50,16 +50,18 @@ public class OpMode extends LinearOpMode {
                 clawServo.setPosition(0);
             }
 
-            arm1.setPosition(arm1.getPosition() + (gamepad2.left_stick_y / 100));
-            arm2.setPosition(arm2.getPosition() + (gamepad2.right_stick_y / 100));
+            arm1.setPosition(clamp(arm1.getPosition() + (gamepad2.left_stick_y / 100), 0, 1));
+            arm2.setPosition(clamp(arm2.getPosition() + (gamepad2.right_stick_y / 100), 0, 1));
 
             if(gamepad2.dpad_up) {
-                arm1.setPosition(0);
+                arm1.setPosition(0.47);
                 arm2.setPosition(0);
+                clawControlServo.setPosition(0.1);
             }
             if(gamepad2.dpad_down) {
                 arm1.setPosition(0);
                 arm2.setPosition(0);
+                clawControlServo.setPosition(0);
             }
             if(gamepad2.dpad_left) {
                 arm1.setPosition(0);
@@ -73,6 +75,10 @@ public class OpMode extends LinearOpMode {
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
         }
+    }
+
+    public static double clamp(double value, double min, double max) {
+        return Math.min(Math.max(value, min), max);
     }
 
     private static void move(double x, double y, double r, double speed){
