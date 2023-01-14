@@ -104,6 +104,11 @@ public class Blue_right_Arm extends LinearOpMode
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
         drive.setPoseEstimate(startPos);
 
+        arm1.setPosition(0);
+        arm2.setPosition(0);
+        clawControlServo.setPosition(0);
+        clawServo.setPosition(.25);
+
         telemetry.setMsTransmissionInterval(50);
 
         /*
@@ -194,48 +199,46 @@ public class Blue_right_Arm extends LinearOpMode
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
             TrajectorySequence seq1 = drive.trajectorySequenceBuilder(startPos)
-                    .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
-                    .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
-                    .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
+                    .turn(Math.toRadians(45))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
-
             clawServo.setPosition(0);
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
-                    .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 12, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(-135))
+                    .lineToLinearHeading(new Pose2d(-39, 9, Math.toRadians(180)))
                     .build();
             drive.followTrajectorySequence(seq2);
-
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                    .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
+                    .turn(Math.toRadians(135))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
-
             clawServo.setPosition(0);
             TrajectorySequence seq4 = drive.trajectorySequenceBuilder(seq3.end())
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
-                    .turn(Math.toRadians(-45))
-                    .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(180))))
-                    .lineToLinearHeading(new Pose2d(61, 36, Math.toRadians(180)))
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(45))
+                    .lineToSplineHeading((new Pose2d(-36,36,Math.toRadians(0))))
+                    .lineToLinearHeading(new Pose2d(-61, 36, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq4);
         }
-
-        else if(tagOfInterest.id == LEFT){
+        else if(tagOfInterest.id == RIGHT){
             clawServo.setPosition(.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
@@ -244,34 +247,33 @@ public class Blue_right_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
-                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
-
             clawServo.setPosition(0);
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(-41, 12, Math.toRadians(180)))
+                    .lineToLinearHeading(new Pose2d(-39, 9, Math.toRadians(180)))
                     .build();
             drive.followTrajectorySequence(seq2);
-
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
-
             clawServo.setPosition(0);
             TrajectorySequence seq4 = drive.trajectorySequenceBuilder(seq3.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
@@ -290,34 +292,33 @@ public class Blue_right_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
-                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
-
             clawServo.setPosition(0);
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(-41, 12, Math.toRadians(180)))
+                    .lineToLinearHeading(new Pose2d(-39, 9, Math.toRadians(180)))
                     .build();
             drive.followTrajectorySequence(seq2);
-
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
-
             clawServo.setPosition(0);
             TrajectorySequence seq4 = drive.trajectorySequenceBuilder(seq3.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
@@ -326,8 +327,7 @@ public class Blue_right_Arm extends LinearOpMode
                     .build();
             drive.followTrajectorySequence(seq4);
         }
-        else
-        {
+        else{
             clawServo.setPosition(.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
@@ -336,45 +336,42 @@ public class Blue_right_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
-                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
-
             clawServo.setPosition(0);
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(-41, 12, Math.toRadians(180)))
+                    .lineToLinearHeading(new Pose2d(-39, 9, Math.toRadians(180)))
                     .build();
             drive.followTrajectorySequence(seq2);
-
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
-
             clawServo.setPosition(0);
             TrajectorySequence seq4 = drive.trajectorySequenceBuilder(seq3.end())
                     .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
                     .turn(Math.toRadians(45))
                     .lineToSplineHeading((new Pose2d(-36,36,Math.toRadians(0))))
-                    .lineToSplineHeading((new Pose2d(-12, 36, Math.toRadians(270))))
+                    .lineToSplineHeading((new Pose2d(-12, 36, Math.toRadians(0))))
                     .build();
             drive.followTrajectorySequence(seq4);
         }
-
-
     }
 
 

@@ -86,6 +86,10 @@ public class OpMode extends LinearOpMode {
                 arm2.setPosition(0.55);
                 clawControlServo.setPosition(0.4);
             }
+            if(gamepad2.b)
+            {
+                clawControlServo.setPosition(0.15);
+            }
 
 
             move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
