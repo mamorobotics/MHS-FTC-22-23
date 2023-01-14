@@ -206,7 +206,7 @@ public class Blue_left_Arm extends LinearOpMode
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 12, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(39, 12, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
             arm1.setPosition(0.65);
@@ -251,7 +251,7 @@ public class Blue_left_Arm extends LinearOpMode
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 14, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(39, 14, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
             arm1.setPosition(0.65);
@@ -296,7 +296,7 @@ public class Blue_left_Arm extends LinearOpMode
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 14, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(39, 14, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
             arm1.setPosition(0.65);
@@ -340,7 +340,7 @@ public class Blue_left_Arm extends LinearOpMode
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 14, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(39, 14, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
             arm1.setPosition(0.65);
