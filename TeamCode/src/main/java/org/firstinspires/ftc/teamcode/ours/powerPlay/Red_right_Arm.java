@@ -26,6 +26,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
@@ -35,17 +36,19 @@ import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+
 import java.util.ArrayList;
 
 @Autonomous
-public class Blue_left_slide extends LinearOpMode
+public class Red_right_Arm extends LinearOpMode
 {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
 
     static final double FEET_PER_METER = 3.28084;
     static DcMotor LM;
-    Pose2d startPos = new Pose2d(36, 62, Math.toRadians(270));
+    static Servo arm1, arm2, clawControlServo, clawServo;
+    Pose2d startPos = new Pose2d(-36, 62, Math.toRadians(270));
 
 
     // Lens intrinsics
@@ -67,13 +70,17 @@ public class Blue_left_slide extends LinearOpMode
 
     AprilTagDetection tagOfInterest = null;
 
+
+
     @Override
     public void runOpMode()
     {
 
-        LM = hardwareMap.get(DcMotor.class, "liftMotor");
-        LM.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        LM.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        clawServo = hardwareMap.get(Servo.class, "clawServo");
+        clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
+
+        arm1 = hardwareMap.get(Servo.class, "arm1");
+        arm2 = hardwareMap.get(Servo.class, "arm2");
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
@@ -229,144 +236,143 @@ public class Blue_left_slide extends LinearOpMode
         else if(tagOfInterest.id == LEFT){
             TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                     .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
+                                    clawServo.setPosition(.25);
+                                    arm1.setPosition(0);
+                                    arm2.setPosition(0.3);
+                                    clawControlServo.setPosition(0.7);
                     })
-                    .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
-                    .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(-3500);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
-                    })
-                    .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(26, 2, Math.toRadians(225)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
-                    .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(-3500);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                    .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(26, 2, Math.toRadians(225)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
+                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
-                    .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(270))))
-                    .lineToLinearHeading(new Pose2d(61, 36, Math.toRadians(270)))
+                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .waitSeconds(0.5)
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(-135))
+                    .lineToLinearHeading(new Pose2d(-41, 12, Math.toRadians(180)))
+                    .addDisplacementMarker(() -> {
+                                    arm1.setPosition(0.2);
+                                    arm2.setPosition(0);
+                                    clawControlServo.setPosition(0.25);
+                    })
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0.25);
+                    })
+                    .addDisplacementMarker(() -> {
+                                    arm1.setPosition(0);
+                                    arm2.setPosition(0.3);
+                                    clawControlServo.setPosition(0.7);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
+                    .turn(Math.toRadians(135))
+                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .waitSeconds(0.5)
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(45))
+                    .lineToSplineHeading((new Pose2d(-36,36,Math.toRadians(0))))
+                    .lineToLinearHeading(new Pose2d(-61, 36, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(baseSeq);
         }
         else if(tagOfInterest.id == MIDDLE){
             TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                     .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
+                                    clawServo.setPosition(.25);
+                                    arm1.setPosition(0);
+                                    arm2.setPosition(0.3);
+                                    clawControlServo.setPosition(0.7);
                     })
-                    .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
-                    .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(-3500);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
-                    })
-                    .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(26, 2, Math.toRadians(225)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
-                    .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(-3500);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                    .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(26, 2, Math.toRadians(225)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
+                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
-                    .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(270))))
+                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .waitSeconds(0.5)
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(-135))
+                    .lineToLinearHeading(new Pose2d(-41, 12, Math.toRadians(180)))
+                    .addDisplacementMarker(() -> {
+                        arm1.setPosition(0.2);
+                        arm2.setPosition(0);
+                        clawControlServo.setPosition(0.25);
+                    })
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0.25);
+                    })
+                    .addDisplacementMarker(() -> {
+                        arm1.setPosition(0);
+                        arm2.setPosition(0.3);
+                        clawControlServo.setPosition(0.7);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
+                    .turn(Math.toRadians(135))
+                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .waitSeconds(0.5)
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(45))
+                    .lineToSplineHeading((new Pose2d(-36,36,Math.toRadians(0))))
                     .build();
             drive.followTrajectorySequence(baseSeq);        }
         else{
             TrajectorySequence baseSeq = drive.trajectorySequenceBuilder(startPos)
                     .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
+                                    clawServo.setPosition(.25);
+                                    arm1.setPosition(0);
+                                    arm2.setPosition(0.3);
+                                    clawControlServo.setPosition(0.7);
                     })
-                    .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
-                    .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(-3500);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
-                    })
-                    .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(26, 2, Math.toRadians(225)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
-                    .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(57, 12, Math.toRadians(0)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(-3500);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(-1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
-                    .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(26, 2, Math.toRadians(225)))
-                    .waitSeconds(0.5)
-                    .addDisplacementMarker(() -> {
-                        LM.setTargetPosition(0);
-                        LM.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        LM.setPower(1);
-                    })
-                    .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
+                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
-                    .lineToSplineHeading((new Pose2d(36,36,Math.toRadians(270))))
-                    .lineToLinearHeading(new Pose2d(12, 36, Math.toRadians(270)))
+                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .waitSeconds(0.5)
+                    .addDisplacementMarker(() -> {
+                        /*clawServo.setPosition(0);*/
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(-135))
+                    .lineToLinearHeading(new Pose2d(-41, 12, Math.toRadians(180)))
+                    .addDisplacementMarker(() -> {
+                                    arm1.setPosition(0.2);
+                                    arm2.setPosition(0);
+                                    clawControlServo.setPosition(0.25);
+                    })
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0.25);
+                    })
+                    .addDisplacementMarker(() -> {
+                                    arm1.setPosition(0);
+                                    arm2.setPosition(0.3);
+                                    clawControlServo.setPosition(0.7);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(180)))
+                    .turn(Math.toRadians(135))
+                    .lineToLinearHeading(new Pose2d(-34, 10, Math.toRadians(315)))
+                    .waitSeconds(0.5)
+                    .addDisplacementMarker(() -> {
+                        clawServo.setPosition(0);
+                    })
+                    .lineToLinearHeading(new Pose2d(-36, 12, Math.toRadians(315)))
+                    .turn(Math.toRadians(45))
+                    .lineToSplineHeading((new Pose2d(-36,36,Math.toRadians(0))))
+                    .lineToSplineHeading((new Pose2d(-12, 36, Math.toRadians(270))))
                     .build();
             drive.followTrajectorySequence(baseSeq);
         }
 
+
     }
+
 
     void tagToTelemetry(AprilTagDetection detection)
     {
