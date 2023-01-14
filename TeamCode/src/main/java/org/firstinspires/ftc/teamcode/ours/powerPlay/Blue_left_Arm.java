@@ -72,8 +72,7 @@ public class Blue_left_Arm extends LinearOpMode
 
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() throws InterruptedException {
 
         clawServo = hardwareMap.get(Servo.class, "clawServo");
         clawControlServo = hardwareMap.get(Servo.class, "clawControlServo");
@@ -199,7 +198,7 @@ public class Blue_left_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
@@ -210,17 +209,19 @@ public class Blue_left_Arm extends LinearOpMode
                     .lineToLinearHeading(new Pose2d(41, 12, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
@@ -242,26 +243,30 @@ public class Blue_left_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
+            clawServo.setPosition(0);
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 12, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(41, 14, Math.toRadians(0)))
                     .build();
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            drive.followTrajectorySequence(seq2);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
@@ -283,7 +288,7 @@ public class Blue_left_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
@@ -291,20 +296,22 @@ public class Blue_left_Arm extends LinearOpMode
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 12, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(41, 14, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
@@ -325,7 +332,7 @@ public class Blue_left_Arm extends LinearOpMode
                     .lineToSplineHeading(new Pose2d(36, -12, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(-45))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33, 6.5, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq1);
@@ -333,20 +340,22 @@ public class Blue_left_Arm extends LinearOpMode
             TrajectorySequence seq2 = drive.trajectorySequenceBuilder(seq1.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(225)))
                     .turn(Math.toRadians(135))
-                    .lineToLinearHeading(new Pose2d(41, 12, Math.toRadians(0)))
+                    .lineToLinearHeading(new Pose2d(41, 14, Math.toRadians(0)))
                     .build();
             drive.followTrajectorySequence(seq2);
-            arm1.setPosition(0.2);
-            arm2.setPosition(0);
-            clawControlServo.setPosition(0.25);
+            arm1.setPosition(0.65);
+            arm2.setPosition(0.55);
+            clawControlServo.setPosition(0.4);
+            sleep(4000);
             clawServo.setPosition(0.25);
             arm1.setPosition(0);
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
+            sleep(4000);
             TrajectorySequence seq3 = drive.trajectorySequenceBuilder(seq2.end())
                     .lineToLinearHeading(new Pose2d(36, 12, Math.toRadians(0)))
                     .turn(Math.toRadians(-135))
-                    .lineToLinearHeading(new Pose2d(34, 10, Math.toRadians(225)))
+                    .lineToLinearHeading(new Pose2d(33.5, 7, Math.toRadians(225)))
                     .waitSeconds(0.5)
                     .build();
             drive.followTrajectorySequence(seq3);
