@@ -199,7 +199,7 @@ public class Blue_right_Arm extends LinearOpMode
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
             TrajectorySequence seq1 = drive.trajectorySequenceBuilder(startPos)
-                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 0, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
                     .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
@@ -244,7 +244,7 @@ public class Blue_right_Arm extends LinearOpMode
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
             TrajectorySequence seq1 = drive.trajectorySequenceBuilder(startPos)
-                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 0, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
                     .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
@@ -289,7 +289,7 @@ public class Blue_right_Arm extends LinearOpMode
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
             TrajectorySequence seq1 = drive.trajectorySequenceBuilder(startPos)
-                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 0, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
                     .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
@@ -333,7 +333,7 @@ public class Blue_right_Arm extends LinearOpMode
             arm2.setPosition(0.3);
             clawControlServo.setPosition(0.7);
             TrajectorySequence seq1 = drive.trajectorySequenceBuilder(startPos)
-                    .lineToSplineHeading(new Pose2d(-36, -12, Math.toRadians(270)))
+                    .lineToSplineHeading(new Pose2d(-36, 0, Math.toRadians(270)))
                     .lineToSplineHeading(new Pose2d(-36, 12, Math.toRadians(270)))
                     .turn(Math.toRadians(45))
                     .lineToLinearHeading(new Pose2d(-31, 9, Math.toRadians(315)))
