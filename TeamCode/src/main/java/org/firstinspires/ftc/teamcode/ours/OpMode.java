@@ -9,7 +9,7 @@ public class OpMode extends LinearOpMode {
 
     static Servo arm1, arm2, clawControlServo, clawServo;
 
-    static double speed = 0.5;
+    static double speed = 0.65;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -45,18 +45,24 @@ public class OpMode extends LinearOpMode {
             telemetry.update();
 
             if(gamepad2.right_trigger > 0.1) {
-                clawServo.setPosition(.25);
+                clawServo.setPosition(.24);
             } else {
                 clawServo.setPosition(0);
             }
 
 
             //Pickup
+
+
             if(gamepad2.dpad_right) {
-                clawControlServo.setPosition(0.1);
-                sleep(1750);
-                arm2.setPosition(0);
-                arm1.setPosition(0.43);
+                double starttime = this.getRuntime();
+                while ( this.getRuntime() - starttime < 1.5) {
+                    clawControlServo.setPosition(0.1);
+                    move(gamepad1.left_stick_x, -gamepad1.left_stick_y, gamepad1.right_stick_x, speed);
+                }
+                    arm2.setPosition(0);
+                    arm1.setPosition(0.43);
+
             }
             //High Pole
             if(gamepad2.dpad_up) {
